@@ -31,7 +31,7 @@ module "ec2_instance_group" {
   ami_owner                     = var.ami_owner
   vpc_id                        = module.vpc.vpc_id
   subnet                        = module.subnets.public_subnet_ids[0]
-  security_groups               = [module.vpc.vpc_default_security_group_id, aws_security_group.we_are_all_happy.id]
+  security_groups               = [module.vpc.vpc_default_security_group_id]
   assign_eip_address            = var.assign_eip_address
   associate_public_ip_address   = var.associate_public_ip_address
   instance_type                 = var.instance_type
@@ -49,6 +49,10 @@ module "ec2_instance_group" {
 resource "aws_security_group" "we_are_all_happy" {
   name = "we-are-all-happy"
   vpc_id = module.vpc.vpc_id
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group_rule" "we_are_all_happy" {
