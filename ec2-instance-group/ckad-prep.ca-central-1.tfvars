@@ -12,7 +12,7 @@ instance_type = "m5a.large"
 
 instance_count = 2
 
-allowed_ports = [22, 80, 443]
+allowed_ports = [22, 80, 443, 6443]
 
 generate_ssh_key_pair = true
 

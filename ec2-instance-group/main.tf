@@ -31,7 +31,7 @@ module "ec2_instance_group" {
   ami_owner                     = var.ami_owner
   vpc_id                        = module.vpc.vpc_id
   subnet                        = module.subnets.public_subnet_ids[0]
-  security_groups               = [module.vpc.vpc_default_security_group_id]
+  security_groups               = [module.vpc.vpc_default_security_group_id, aws_security_group.we_are_all_happy.id]
   assign_eip_address            = var.assign_eip_address
   associate_public_ip_address   = var.associate_public_ip_address
   instance_type                 = var.instance_type
@@ -44,4 +44,18 @@ module "ec2_instance_group" {
   delete_on_termination         = var.delete_on_termination
 
   context = module.this.context
+}
+
+resource "aws_security_group" "we_are_all_happy" {
+  name = "we-are-all-happy"
+  vpc_id = module.vpc.vpc_id
+}
+
+resource "aws_security_group_rule" "we_are_all_happy" {
+  security_group_id = aws_security_group.we_are_all_happy.id
+  type              = "ingress"
+  protocol          = "-1"
+  from_port         = 0
+  to_port           = 0
+  cidr_blocks       = ["0.0.0.0/0"]
 }
