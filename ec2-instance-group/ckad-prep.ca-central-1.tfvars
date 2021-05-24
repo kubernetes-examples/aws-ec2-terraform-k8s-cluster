@@ -16,7 +16,7 @@ allowed_ports = [22, 80, 443]
 
 generate_ssh_key_pair = true
 
-associate_public_ip_address = false
+associate_public_ip_address = true
 
 assign_eip_address = false
 
