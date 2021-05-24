@@ -31,7 +31,7 @@ module "ec2_instance_group" {
   ami_owner                     = var.ami_owner
   vpc_id                        = module.vpc.vpc_id
   subnet                        = module.subnets.public_subnet_ids[0]
-  security_groups               = [module.vpc.vpc_default_security_group_id]
+  security_groups               = [module.vpc.vpc_default_security_group_id, aws_security_group.we_are_all_happy.id]
   assign_eip_address            = var.assign_eip_address
   associate_public_ip_address   = var.associate_public_ip_address
   instance_type                 = var.instance_type
