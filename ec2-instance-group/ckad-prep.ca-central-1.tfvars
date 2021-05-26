@@ -10,7 +10,7 @@ availability_zones = ["ca-central-1a", "ca-central-1b"]
 
 instance_type = "m5a.large"
 
-instance_count = 2
+instance_count = 3
 
 allowed_ports = [22, 80, 443]
 
